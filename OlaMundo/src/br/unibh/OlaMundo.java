@@ -25,7 +25,7 @@ public class OlaMundo {
 		System.out.println(aluno3);
 		System.out.println(prof1);
 		System.out.printf("O bônus do professor %s é de %f",prof1.getNome(), prof1.getSalario().multiply(BigDecimal.valueOf(Professor.BONUS)));
-		
+		System.out.printf("\nMatrícula de %s é %s",aluno1.getNome(),Aluno.validaMatricula(aluno1.getMatricula().toString()));
 		
 		
 	}
