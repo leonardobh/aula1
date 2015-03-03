@@ -8,6 +8,7 @@ public class Aluno extends Pessoa {
 	private Date dataAniversario;
 	
 	
+	
 	public Aluno() {
 		
 	}
@@ -29,6 +30,13 @@ public class Aluno extends Pessoa {
 		this.matricula = matricula;
 	}
 
+	public static boolean validaMatricula(String matricula) {
+		if(matricula == null || matricula.trim().isEmpty() || matricula.length()!=8)
+			return false;
+
+		return true;
+	}
+	
 	public Long getMatricula() {
 		return matricula;
 	}
