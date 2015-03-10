@@ -5,6 +5,7 @@ import java.util.Date;
 
 import br.unibh.models.Aluno;
 import br.unibh.models.Professor;
+import br.unibh.persistence.AlunoDAO;
 
 
 public class OlaMundo {
@@ -30,7 +31,13 @@ public class OlaMundo {
 		System.out.println(prof1);
 		System.out.printf("O bônus do professor %s é de %f",prof1.getNome(), prof1.getSalario().multiply(BigDecimal.valueOf(Professor.BONUS)));
 		System.out.printf("\nMatrícula de %s é %s",aluno1.getNome(),Aluno.validaMatricula(aluno1.getMatricula().toString()));
+		System.out.println("\n==========================================================");
+		System.out.println("Alunos do Banco: ");
+		AlunoDAO alunoDao = new AlunoDAO();
 		
+		for(Aluno aluno: alunoDao.findAll()) {
+			System.out.println(aluno);
+		}
 		
 	}
 
