@@ -1,4 +1,4 @@
-package br.unibh;
+package br.unibh.models;
 
 import java.util.Date;
 
@@ -13,20 +13,20 @@ public class Aluno extends Pessoa {
 		
 	}
 	
-	public Aluno(Long matricula, String nome, String cpf, Date dataAniversario) {
-		super(nome,cpf);
+	public Aluno(Long id, Long matricula, String nome, String cpf, Date dataAniversario) {
+		super(id,nome,cpf);
 		this.matricula = matricula;
 		this.dataAniversario = dataAniversario;
 	}
 	
 
-	public Aluno(Long matricula, String nome, String cpf) {
-		super(nome,cpf);
+	public Aluno(Long id,Long matricula, String nome, String cpf) {
+		super(id,nome,cpf);
 		this.matricula = matricula;
 	}
 	
-	public Aluno(Long matricula, String nome) {
-		super(nome,null);
+	public Aluno(Long id,Long matricula, String nome) {
+		super(id,nome,null);
 		this.matricula = matricula;
 	}
 

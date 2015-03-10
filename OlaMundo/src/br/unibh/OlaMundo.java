@@ -3,6 +3,10 @@ package br.unibh;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import br.unibh.models.Aluno;
+import br.unibh.models.Professor;
+
+
 public class OlaMundo {
 
 	public static void main(String[] args) {
@@ -13,11 +17,11 @@ public class OlaMundo {
 		
 		Professor prof1;
 		
-		aluno1 = new Aluno(113113253L,"Leonardo","00000000000",new Date());
-		aluno2 = new Aluno(111013243L,"Gilberto","00000000000");
-		aluno3 = new Aluno(111013153L,"Tobias");
+		aluno1 = new Aluno(1L,113113253L,"Leonardo","00000000000",new Date());
+		aluno2 = new Aluno(2L,111013243L,"Gilberto","00000000000");
+		aluno3 = new Aluno(3L,111013153L,"Tobias");
 		
-		prof1 = new Professor("Cruvinel","0000000000");
+		prof1 = new Professor(1L,"Cruvinel","0000000000");
 		prof1.setSalario(new BigDecimal(10000.64));
 		
 		System.out.println(aluno1);

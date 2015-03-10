@@ -1,7 +1,8 @@
-package br.unibh;
+package br.unibh.models;
 
 public abstract class Pessoa {
 	
+	private Long id;
 	private String nome;
 	private String cpf;
 	
@@ -10,12 +11,21 @@ public abstract class Pessoa {
 		
 	}
 	
-	public Pessoa(String nome, String cpf) {
+	public Pessoa(Long id, String nome, String cpf) {
 		super();
+		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 	}
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -31,7 +41,7 @@ public abstract class Pessoa {
 	
 	@Override
 	public String toString() {
-		return "Pessoa [nome=" + nome + ", cpf=" + cpf + "]";
+		return "Pessoa [id=" + id + ", nome=" + nome + ", cpf=" + cpf + "]";
 	}
 	
 }

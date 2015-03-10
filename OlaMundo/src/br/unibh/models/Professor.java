@@ -1,4 +1,4 @@
-package br.unibh;
+package br.unibh.models;
 
 import java.math.BigDecimal;
 
@@ -12,13 +12,13 @@ public class Professor extends Pessoa{
 		
 	}
 	
-	public Professor(String nome, String cpf, BigDecimal salario) {
-		super(nome,cpf);
+	public Professor(Long id,String nome, String cpf, BigDecimal salario) {
+		super(id,nome,cpf);
 		this.salario = salario;
 	}
 	
-	public Professor(String nome, String cpf) {
-		super(nome,cpf);
+	public Professor(Long id,String nome, String cpf) {
+		super(id,nome,cpf);
 	}
 
 	public BigDecimal getSalario() {
