@@ -10,11 +10,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name="TB_ALUNO")
 @PrimaryKeyJoinColumn
 public class Aluno extends Pessoa {
 
+	@NotBlank
 	@Column(unique=true)
 	private Long matricula;
 	
