@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -15,6 +17,8 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 @Table(name="TB_ALUNO")
 @PrimaryKeyJoinColumn
+@NamedQueries({
+@NamedQuery(name="Aluno.findByName", query = "select a from Aluno a where a.nome like :nome")})
 public class Aluno extends Pessoa {
 
 	@NotBlank
