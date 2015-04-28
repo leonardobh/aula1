@@ -36,7 +36,7 @@ public class ServicoAluno implements DAO<Long,Aluno> {
 	@Override
 	public void delete(Aluno type) throws Exception {
 		log.info("Deletando "+type);
-		em.remove(type);
+		em.remove(em.getReference(Aluno.class, type.getId()));
 	}
 
 	@Override

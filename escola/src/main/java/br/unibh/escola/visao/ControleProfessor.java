@@ -1,5 +1,6 @@
 package br.unibh.escola.visao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -106,10 +107,12 @@ public class ControleProfessor {
 	
 	public void novo(){ 
 		professor = new Professor();
+		listaProfessor = new ArrayList<Professor>();
 	}
 	
 	public void cancelar(){
 		professor = null;
+		pesquisar();
 	}
 	
 	public void editar(){
@@ -129,6 +132,7 @@ public class ControleProfessor {
 			e.printStackTrace();
 		}
 		professor = null;
+		pesquisar();
 	}
 	
 	

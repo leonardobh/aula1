@@ -36,7 +36,7 @@ public class ServicoProfessor implements DAO<Long,Professor> {
 	@Override
 	public void delete(Professor type) throws Exception {
 		log.info("Deletando "+type);
-		em.remove(type);
+		em.remove(em.getReference(Professor.class, type.getId()));
 	}
 
 	@Override

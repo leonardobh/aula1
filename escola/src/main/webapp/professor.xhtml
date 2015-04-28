@@ -31,7 +31,7 @@
 				</rich:panel>
 			</h:form>
 		</h:panelGroup>
-		<rich:panel>
+		<rich:panel rendered="#{not empty professormb.listaProfessor}">
 			<h:outputText value="Lista de Professores"
 				style="font-size:15px;font-weight:bold" />
 			<h:form id="arg">

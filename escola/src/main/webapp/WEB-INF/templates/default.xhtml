@@ -15,6 +15,7 @@
    <div id="container">
    		
 	  <div id="menu">
+	  <h:form>
 	   	<rich:toolbar height="26" itemSeparator="grid">
 	   		<rich:toolbarGroup>
 	   			<rich:dropDownMenu>
@@ -23,7 +24,7 @@
 	   				 		<h:outputText value="Aluno" />
 	   				 	</h:panelGroup>
 	   				</f:facet>
-	   				 <rich:menuItem label="Manter Aluno"/>
+	   				 <rich:menuItem label="Manter Aluno" action="aluno.xhtml" />
 	   			</rich:dropDownMenu>
 	   			
 	   			<rich:dropDownMenu>
@@ -32,12 +33,13 @@
 	   				 		<h:outputText value="Professor" />
 	   				 	</h:panelGroup>
 	   				</f:facet>
-	   				 <rich:menuItem label="Manter Professor" action="professor.jsf"/>
+	   				 <rich:menuItem label="Manter Professor" action="professor.xhtml"/>
 	   			</rich:dropDownMenu>
 	   			
 	   			
 	   		</rich:toolbarGroup>
 	   	</rich:toolbar>
+	   	</h:form>
 	   	
 	   	
 	  </div>

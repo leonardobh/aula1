@@ -18,7 +18,7 @@
 						<h:inputText id="nome" value="#{alunomb.aluno.nome}" size="50" />
 						<h:message for="nome" errorClass="invalid" />
 						<h:outputLabel value="CPF " />
-						<h:inputText id="cof" value="#{alunomb.aluno.cpf}" size="14" />
+						<h:inputText id="cpf" value="#{alunomb.aluno.cpf}" size="14" />
 						<h:message for="cpf" errorClass="invalid" />
 						<h:outputLabel value="Matrícula " />
 						<h:inputText id="matricula" value="#{alunomb.aluno.matricula}"
@@ -37,7 +37,7 @@
 				</rich:panel>
 			</h:form>
 		</h:panelGroup>
-		<rich:panel>
+		<rich:panel rendered="#{not empty alunomb.listaAluno}">
 			<h:outputText value="Lista de Alunos"
 				style="font-size:15px;font-weight:bold" />
 			<h:form id="arg">

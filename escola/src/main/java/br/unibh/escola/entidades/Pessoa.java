@@ -24,13 +24,12 @@ public abstract class Pessoa {
 	
 	@NotBlank
 	@Size(min=5,max=100)
-	@Pattern(regexp="^[[ ]|\\p{L}*]+$")
+	@Pattern(regexp="^[[ ]|\\p{L}*]+$",message="O nome deve conter letras maiúsculas ou minúsculas, acentuadas ou não")
 	@Column(length=100,nullable=false)
 	private String nome;
 	
 	@NotBlank
-	@Size(min=14,max=14)
-	@Pattern(regexp="\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}")
+	@Pattern(regexp="\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}", message="O cpf deve seguir a máscara xxx.xxx.xxx-xx")
 	@Column(unique=true,nullable=false,length=14)
 	private String cpf;
 
