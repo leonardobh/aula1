@@ -48,12 +48,12 @@
 				<h:commandButton id="novo" action="#{alunomb.novo}" value="Novo"
 					render="cadastro" />
 			</h:form>
-			<h:panelGroup rendered="#{empty alunomb.alunoes}">
+			<h:panelGroup rendered="#{empty alunomb.listaAluno}">
 				<h:outputText value="Nenhum aluno existe" />
 			</h:panelGroup>
 			<h:form id="edt">
-				<rich:dataTable id="tabela" var="aluno" value="#{alunomb.alunoes}"
-					rendered="#{not empty alunomb.alunoes}"
+				<rich:dataTable id="tabela" var="aluno" value="#{alunomb.listaAluno}"
+					rendered="#{not empty alunomb.listaAluno}"
 					onrowclick="selectRow('#{aluno.id}')">
 					<rich:column>
 						<f:facet name="header">

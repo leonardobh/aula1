@@ -24,7 +24,7 @@ public abstract class Pessoa {
 	
 	@NotBlank
 	@Size(min=5,max=100)
-	@Pattern(regexp="[A-Za-zÀ-ú]*")
+	@Pattern(regexp="^[[ ]|\\p{L}*]+$")
 	@Column(length=100,nullable=false)
 	private String nome;
 	

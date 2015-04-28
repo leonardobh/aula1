@@ -10,23 +10,23 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import br.unibh.escola.entidades.Aluno;
-import br.unibh.escola.negocio.ServicoAluno;
+import br.unibh.escola.entidades.Professor;
+import br.unibh.escola.negocio.ServicoProfessor;
 
-@ManagedBean(name="alunomb")
+@ManagedBean(name="professormb")
 @ViewScoped
-public class ControleAluno {
+public class ControleProfessor {
 	
 	@Inject
 	private Logger log;
 	
 	@Inject
-	private ServicoAluno sa;
+	private ServicoProfessor sp;
 	
-	private Aluno aluno;
+	private Professor professor;
 	private String nomeArg;
 	private Long id;
-	private List<Aluno> listaAluno;
+	private List<Professor> listaProfessor;
 	
 	public Logger getLog() {
 		return log;
@@ -34,17 +34,17 @@ public class ControleAluno {
 	public void setLog(Logger log) {
 		this.log = log;
 	}
-	public ServicoAluno getSa() {
-		return sa;
+	public ServicoProfessor getSp() {
+		return sp;
 	}
-	public void setSa(ServicoAluno sa) {
-		this.sa = sa;
+	public void setSp(ServicoProfessor sp) {
+		this.sp = sp;
 	}
-	public Aluno getAluno() {
-		return aluno;
+	public Professor getProfessor() {
+		return professor;
 	}
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
 	}
 	public String getNomeArg() {
 		return nomeArg;
@@ -58,18 +58,18 @@ public class ControleAluno {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public List<Aluno> getListaAluno() {
-		return listaAluno;
+	public List<Professor> getListaProfessor() {
+		return listaProfessor;
 	}
-	public void setListaAluno(List<Aluno> listaAluno) {
-		this.listaAluno = listaAluno;
+	public void setListaProfessor(List<Professor> listaProfessor) {
+		this.listaProfessor = listaProfessor;
 	}
 	
 	@PostConstruct	
 	public void inicializaLista() {
-		log.info("Executando MB do Aluno");
+		log.info("Executando MB do Professor");
 		try {
-			listaAluno = sa.findAll();
+			listaProfessor = sp.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,10 +80,10 @@ public class ControleAluno {
 		FacesMessage facesMsg;
 		
 		try {
-			if (aluno.getId() == null) {
-				aluno = sa.insert(aluno);
+			if (professor.getId() == null) {
+				professor = sp.insert(professor);
 			} else {
-				aluno = sa.update(aluno);
+				professor = sp.update(professor);
 			}
 		} catch (Exception e){
 			facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: "+e.getMessage(), "");
@@ -91,13 +91,13 @@ public class ControleAluno {
 			return;
 		}
 			facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO,
-			"Aluno gravado com sucesso!", "");
+			"Professor gravado com sucesso!", "");
 			FacesContext.getCurrentInstance().addMessage("messagePanel", facesMsg);
 	}
 	
 	public void pesquisar() {
 		try {
-			listaAluno = sa.findByName(nomeArg);
+			listaProfessor = sp.findByName(nomeArg);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -105,30 +105,30 @@ public class ControleAluno {
 	}
 	
 	public void novo(){ 
-		aluno = new Aluno();
+		professor = new Professor();
 	}
 	
 	public void cancelar(){
-		aluno = null;
+		professor = null;
 	}
 	
 	public void editar(){
 		try {
-			aluno = sa.find(id);
+			professor = sp.find(id);
 			return;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		aluno = null;
+		professor = null;
 	}
 	
 	public void excluir(){
 		try {
-			sa.delete(sa.find(id));
+			sp.delete(sp.find(id));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		aluno = null;
+		professor = null;
 	}
 	
 	

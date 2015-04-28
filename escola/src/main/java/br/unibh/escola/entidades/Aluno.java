@@ -21,7 +21,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @NamedQuery(name="Aluno.findByName", query = "select a from Aluno a where a.nome like :nome")})
 public class Aluno extends Pessoa {
 
-	@NotBlank
+	@NotNull
 	@Column(unique=true)
 	private Long matricula;
 	
