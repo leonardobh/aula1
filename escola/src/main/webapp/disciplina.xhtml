@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h:panelGroup id="cadastro">
+			<h:form id="cad" rendered="#{not empty disciplinamb.disciplina}">
+				<rich:panel>
+					<h:outputText value="Cadastro de Disciplina"
+						style="font-size:15px;font-weight:bold" />
+					<rich:messages />
+					<rich:tabPanel headerAlignment="left" switchType="client">
+						<rich:tab label="Geral" header="Geral">
+							<h:panelGrid columns="3">
+								<h:outputLabel value="Nome " />
+								<h:inputText id="nome" value="#{disciplinamb.disciplina.nome}"
+									size="50" />
+								<h:message for="nome" errorClass="invalid" />
+								<h:outputLabel value="Curso " />
+								<h:inputText id="curso" value="#{disciplinamb.disciplina.curso}"
+									size="14" />
+								<h:message for="curso" errorClass="invalid" />
+								<h:outputLabel value="Carga horária " />
+								<rich:inputNumberSpinner value="#{disciplinamb.disciplina.cargaHoraria}" id="cargaHoraria" maxValue="160"
+									minValue="0" />
+								<h:message for="cargaHoraria" errorClass="invalid" />
+								<h:outputLabel value="Tipo" />
+								<h:selectOneRadio id="tipo"
+									value="#{disciplinamb.disciplina.tipo}">
+									<f:selectItems value="#{disciplinamb.listaTipoDisciplina}"
+										var="td" itemLabel="#{td.descricao}" itemValue="#{td}" />
+								</h:selectOneRadio>
+								<h:message for="tipo" errorClass="invalid" />
+								<h:outputLabel value="Sala: " for="sala" />
+								<h:selectOneMenu id="sala" converter="ConversorSala"
+									value="#{disciplinamb.disciplina.sala}" required="true">
+									<f:selectItems value="#{disciplinamb.listaSala}" var="sala"
+										itemLabel="#{sala.codigo} (capacidade=#{sala.capacidade})"
+										itemValue="#{sala}" />
+								</h:selectOneMenu>
+								<h:message for="sala" errorClass="invalid" />
+								<h:outputLabel value="Professor: " for="professor" />
+								<h:selectOneMenu id="professor" converter="ConversorProfessor" 
+									value="#{disciplinamb.disciplina.professor}" required="true">
+									<f:selectItems value="#{disciplinamb.listaProfessor}"
+										var="professor" itemLabel="#{professor.nome}"
+										itemValue="#{professor}"  />
+								</h:selectOneMenu>
+								<h:message for="professor" errorClass="invalid" />
+							</h:panelGrid>
+						</rich:tab>
+						<rich:tab label="Plano de Ensino" header="Plano de Ensino">
+							<h:panelGrid columns="3">
+								<h:outputLabel value="Ementa "/>
+								<h:inputTextarea id="ementa" value="#{disciplinamb.disciplina.ementa}" rows="4" cols="100"/>
+								<h:message for="ementa"/>
+								<h:outputLabel value="Bibliografia "/>
+								<h:inputTextarea id="bibliografia" value="#{disciplinamb.disciplina.bibliografia}" rows="4" cols="100"/>
+								<h:message for="bibliografia"/>
+								<h:outputLabel value="Distribuição das Avaliações "/>
+								<h:inputTextarea id="dist" value="#{disciplinamb.disciplina.distribuicaoAvaliacao}" rows="4" cols="100"/>
+								<h:message for="dist"/>
+								<h:outputLabel value="Observação "/>
+								<h:inputTextarea id="obs" value="#{disciplinamb.disciplina.observacao}" rows="5" cols="100"/>
+								<h:message for="obs"/>
+							</h:panelGrid>
+						</rich:tab>
+						<rich:tab label="Alunos" header="Alunos" >
+							<h:panelGrid columns="3">
+								<rich:pickList copyAllControlLabel="Copiar todos"
+									copyControlLabel="Copiar"
+									converter="ConversorAluno"
+									removeControlLabel="Remover"
+									removeAllControlLabel="Remover todos"
+									value="#{disciplinamb.disciplina.alunos}">
+									<f:selectItems value="#{disciplinamb.listaAlunos}" var="aluno" itemLabel="#{aluno.nome}" itemValue="#{aluno}" />
+								</rich:pickList>
+							</h:panelGrid>
+						</rich:tab>
+						
+					</rich:tabPanel>
+					
+					<h:commandButton id="gravar" action="#{disciplinamb.gravar}"
+						value="Gravar" />
+					<h:commandButton id="cancelar" action="#{disciplinamb.cancelar}"
+						value="Cancelar" immediate="true" />
+				</rich:panel>
+			</h:form>
+		</h:panelGroup>
+		<rich:panel rendered="#{not empty disciplinamb.listaDisciplina}">
+			<h:outputText value="Lista de Disciplinas"
+				style="font-size:15px;font-weight:bold" />
+			<h:form id="arg">
+				<h:outputLabel value="Nome:" />
+				<h:inputText id="nomeArg" value="#{disciplinamb.nomeArg}" />
+				<h:outputLabel value="Curso: " />
+				<h:inputText id="cursoArg" value="#{disciplinamb.cursoArg}" />
+				<h:commandButton id="pesquisar" action="#{disciplinamb.pesquisar}"
+					value="Pesquisar" render="tabela" />
+				<h:commandButton id="novo" action="#{disciplinamb.novo}" value="Novo"
+					render="cadastro" />
+			</h:form>
+			<h:panelGroup rendered="#{empty disciplinamb.listaDisciplina}">
+				<h:outputText value="Nenhum disciplina existe" />
+			</h:panelGroup>
+			<h:form id="edt">
+				<rich:dataTable id="tabela" var="disciplina" value="#{disciplinamb.listaDisciplina}"
+					rendered="#{not empty disciplinamb.listaDisciplina}"
+					onrowclick="selectRow('#{disciplina.id}')">
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Id " />
+						</f:facet>
+						<h:outputText value="#{disciplina.id}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Nome " />
+						</f:facet>
+						<h:outputText value="#{disciplina.nome}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Curso " />
+						</f:facet>
+						<h:outputText value="#{disciplina.curso}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Carga Horária " />
+						</f:facet>
+						<h:outputText value="#{disciplina.cargaHoraria}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Tipo " />
+						</f:facet>
+						<h:outputText value="#{disciplina.tipo.descricao}"/>
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Sala " />
+						</f:facet>
+						<h:outputText value="#{disciplina.sala.codigo}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Professor " />
+						</f:facet>
+						<h:outputText value="#{disciplina.professor.nome}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Comandos " />
+						</f:facet>
+						<h:commandLink id="editar" action="#{disciplinamb.editar}"
+							value="Editar">
+							<f:setPropertyActionListener target="#{disciplinamb.id}"
+								value="#{disciplina.id}" />
+						</h:commandLink>
+						<h:outputText value=" " />
+						<h:commandLink id="excluir" action="#{disciplinamb.excluir}"
+							value="Excluir" render="tabela">
+							<f:setPropertyActionListener target="#{disciplinamb.id}"
+								value="#{disciplina.id}" />
+						</h:commandLink>
+					</rich:column>
+				</rich:dataTable>
+			</h:form>
+		</rich:panel>
+	</ui:define>
+</ui:composition>
